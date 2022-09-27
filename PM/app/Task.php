@@ -27,4 +27,4 @@
         
         ////////////////////////////////////////////////////////////////////////////////
         
-       
+        @Query("select f from Flight f where f.source = ?1 and f.destination = ?2 and f.depatureDate = ?3")
