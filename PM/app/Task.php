@@ -201,3 +201,144 @@ export class FlightServiceService {
         </li>
     </ul>
 </div>
+      
+      /////////////////////////////////booking confirmation.html///////////////////////
+      <div class="invoice">
+    <h3>BookMyFlight</h3>
+    <label>AirLines :</label>{{flight.name}}<br />
+
+    <label class="from">From</label><br />
+    {{flight.source}}
+
+    <label class="to">To</label><br />
+    {{flight.destination}}<br />
+
+    <label>Fare/Adult :</label>{{flight.adultFare}}&nbsp;&nbsp;<label>Fare/Child :</label>{{flight.childFare}}<br />
+    <form #fareForm="ngForm" (change)="change(fareForm)">
+        <label>No.of.Adults :</label>
+        <input type="number" name="no_of_adult" ngModel #no_of_adult="ngModel"><br />
+        <label>No.of.Children :</label>
+        <input type="number" name="no_of_children" ngModel #no_of_children="ngModel"><br />
+        <label>Total Fare : {{sum}}</label>
+    </form> 
+</div>
+      
+      ////////////////////////////////////////booking-confirmation component.ts///////////////////////////
+      
+      import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Flight } from 'src/app/model/flight.model';
+import { FlightServiceService } from 'src/app/service/flight-service.service';
+
+@Component({
+  selector: 'app-booking-confirmation',
+  templateUrl: './booking-confirmation.component.html',
+  styleUrls: ['./booking-confirmation.component.css']
+})
+export class BookingConfirmationComponent implements OnInit {
+  id:string;
+  flightArr:Flight[];
+  flight:Flight;
+  name:string;
+  sum:number = 0;
+  constructor(private flightService:FlightServiceService) { }
+
+  ngOnInit(): void {
+    this.id = localStorage.getItem('id');
+
+    this.flightService.getFlightDetailsById(this.id).subscribe(data=>{
+    this.flight = data;
+    });
+  }
+
+  change(fareForm: NgForm){
+    this.sum = (fareForm.value.no_of_adult*this.flight.adultFare) + 
+                (fareForm.value.no_of_children*this.flight.childFare);
+  }
+
+}
+      
+      //////////////////////////////post-flight-html//////////////////
+      
+      <div class="form">
+    <form #flightForm="ngForm" (submit)="onFlighttSubmit(flightForm)">
+      <h2>Vendors Flight Form</h2>
+      <label>Name: </label>
+      <input type="text" name="name" ngModel #name="ngModel"><br /><br />
+
+      <label>Source: </label>
+      <input type="text" name="source" ngModel #source="ngModel"> &nbsp;
+
+      <label>Destination: </label>
+      <input type="text" name="destination" ngModel #destination="ngModel"><br /><br />
+
+      <label>Departure Date: </label>
+      <input type="date" name="depatureDate" ngModel #depatureDate="ngModel"> &nbsp;
+
+      <label>Departure Time:</label>
+      <input type="time" name="depatureTime" ngModel #depatureTime="ngModel"><br /><br />
+
+      <label>Arrival Date: </label>
+      <input type="date" name="arrivalDate" ngModel #arrivalDate="ngModel">
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <label>Arrival Time:</label>
+      <input type="time" name="arrivalTime" ngModel #arrivalTime="ngModel"><br /><br />   
+
+      <label>Adult Fare:</label>
+      <input type="number" name="adultFare" ngModel #adultFare="ngModel"> &nbsp;
+
+      <label>Child Fare:</label>
+      <input type="number" name="childFare" ngModel #childFare="ngModel"><br /><br />
+
+      <label>Duration:</label>
+      <input type="number" name="duration" ngModel #duration="ngModel">&nbsp;&nbsp; 
+
+      <label>Seats:</label>
+      <input type="number" name="seats" ngModel #seats="ngModel"><br /><br />
+  
+      <input type="submit" value="Post Flight">
+    </form>
+  </div>
+  
+      ///////////////////////////////post-flight.ts
+      
+      import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Flight } from 'src/app/model/flight.model';
+import { FlightServiceService } from 'src/app/service/flight-service.service';
+
+@Component({
+  selector: 'app-post-flight',
+  templateUrl: './post-flight.component.html',
+  styleUrls: ['./post-flight.component.css']
+})
+export class PostFlightComponent implements OnInit {
+
+  constructor(private flightService: FlightServiceService,private router:Router) { }
+
+  ngOnInit(): void {
+  }
+
+  onFlighttSubmit(flightForm: NgForm){
+    let flight : Flight={
+      name:flightForm.value.name,
+      source:flightForm.value.source,
+      destination:flightForm.value.destination,
+      depatureDate:flightForm.value.depatureDate,
+      depatureTime:flightForm.value.depatureTime,
+      arrivalDate:flightForm.value.arrivalDate,
+      arrivalTime:flightForm.value.arrivalTime,
+      duration:flightForm.value.duration,
+      adultFare:flightForm.value.adultFare,
+      childFare:flightForm.value.childFare,
+      seats:flightForm.value.seats,
+    };
+
+    this.flightService.postFlight(flight).subscribe();
+    this.router.navigateByUrl('/post-successful');
+  }
+
+}
+      ////////////////////////////post-successfull
