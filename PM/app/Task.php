@@ -368,3 +368,14 @@ export class PostFlightComponent implements OnInit {
         
         return flightRepository.findByDetails(source, destination, temp);
     }
+
+      constructor(private http:HttpClient) { }
+
+  searchFlights(search:Search): Observable<Flight[]>{
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("source",search.source);
+    queryParams = queryParams.append("destination",search.destination);
+    queryParams = queryParams.append("date",search.date);
+
+    return this.http.get<Flight[]>("http://localhost:5671/flight/details",{params:queryParams});
+  }
