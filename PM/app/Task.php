@@ -358,3 +358,13 @@ export class PostFlightComponent implements OnInit {
     childFare:number;
     seats:number;
 }
+      
+      @GetMapping("/flight/details")
+    public List<Flight> getFlightsByDetails(@RequestParam("source") String source,@RequestParam("destination") String destination,@RequestParam("date") String date){
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+        
+        LocalDate temp = LocalDate.parse(date, formatter);
+        
+        return flightRepository.findByDetails(source, destination, temp);
+    }
