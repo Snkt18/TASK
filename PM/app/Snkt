@@ -1,0 +1,700 @@
+//Nav-Bar
+
+<header>
+    <nav class="navbar">
+        <ul>
+            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/insert-flight">Add Flight</a></li>
+            <li><a routerLink="/search-flights">Search Flight</a></li>
+            <li><a routerLink="/all-bookings">All Bookings</a></li>
+            <li><a routerLink="/all-flights">All Flights</a></li>
+        </ul>
+    </nav>
+</header>
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(20, 107, 148);
+    border-radius: 10px;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #04AA6D;
+    
+    //Home
+    
+    <div class="title">
+    <h1>
+        Welcome To BookMyFlight App!!!
+    </h1>
+</div>
+
+.title{
+    color: black;
+    font-size: xx-large;
+
+}
+
+//Search Flight
+
+<h1>Search Flight</h1>
+<div class="form-style-3">
+    <form #searchForm="ngForm" (submit)="onSearchSubmit(searchForm)">
+        <fieldset>
+            <legend>Search Flight</legend>
+            <label for="field1"><span>Source <span class="required">*</span></span><input type="text" name="source" ngModel #source="ngModel" placeholder="Source *"/></label>
+            <label for="field2"><span>Destination <span class="required">*</span></span><input type="text" name="destination" ngModel #destination="ngModel" placeholder="Destination *" /></label>
+            <label for="field3"><span>Departure Date: <span class="required">*</span></span><input type="date" name="date" ngModel #date="ngModel"></label>
+        </fieldset>
+        <input type="submit" value="Search Flight" />
+    </form>
+</div>
+
+<h3>Flights</h3>
+<div *ngIf="status">
+    
+    <div id="extra_box">
+        <div class="flight_box1" *ngFor="let f of flightArr">
+            Source : {{f.source}} <br>
+            Destination : {{f.destination}} <br>
+            Departure Date : {{f.departureDate}} <br>
+            Departure Time : {{f.departureTime}} <br>
+            Arrival Date : {{f.arrivalDate}} <br>
+            Arrival Time : {{f.arrivalTime}} <br>
+            Fare / Adult : {{f.adultFare}} <br>
+            Fare / Child : {{f.childFare}} <br>
+            <button (click)="bookFlight(f.id)">Book</button>
+        </div>
+    </div>
+    <br> 
+
+</div>
+
+.form-style-3{
+    max-width: 450px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.form-style-3 label{
+    display:block;
+    margin-bottom: 10px;
+}
+.form-style-3 label > span{
+    float: left;
+    width: 100px;
+    color: rgb(23, 151, 194);
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 1px 1px 1px #fff;
+}
+.form-style-3 fieldset{
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    border: 1px solid #FFD2D2;
+    padding: 20px;
+    background: #FFF4F4;
+    box-shadow: inset 0px 0px 15px #FFE5E5;
+    -moz-box-shadow: inset 0px 0px 15px #FFE5E5;
+    -webkit-box-shadow: inset 0px 0px 15px #FFE5E5;
+}
+.form-style-3 fieldset legend{
+    color: #FFA0C9;
+    border-top: 1px solid #FFD2D2;
+    border-left: 1px solid #FFD2D2;
+    border-right: 1px solid #FFD2D2;
+    border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    background: #FFF4F4;
+    padding: 0px 8px 3px 8px;
+    box-shadow: -0px -1px 2px #F1F1F1;
+    -moz-box-shadow:-0px -1px 2px #F1F1F1;
+    -webkit-box-shadow:-0px -1px 2px #F1F1F1;
+    font-weight: normal;
+    font-size: 12px;
+}
+.form-style-3 textarea{
+    width:250px;
+    height:100px;
+}
+.form-style-3 input[type=text],
+.form-style-3 input[type=date],
+.form-style-3 input[type=datetime],
+.form-style-3 input[type=number],
+.form-style-3 input[type=search],
+.form-style-3 input[type=time],
+.form-style-3 input[type=url],
+.form-style-3 input[type=email],
+.form-style-3 select, 
+.form-style-3 textarea{
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border: 1px solid #FFC2DC;
+    outline: none;
+    color: rgb(23, 151, 194);
+    padding: 5px 8px 5px 8px;
+    box-shadow: inset 1px 1px 4px #FFD5E7;
+    -moz-box-shadow: inset 1px 1px 4px #FFD5E7;
+    -webkit-box-shadow: inset 1px 1px 4px #FFD5E7;
+    background: #FFEFF6;
+    width:50%;
+}
+.form-style-3  input[type=submit],
+.form-style-3  input[type=button]{
+    background: rgb(128, 145, 240);
+    border: 1px solid #4ac97b;
+    padding: 5px 15px 5px 15px;
+    color: #FFCBE2;
+    box-shadow: inset -1px -1px 3px #FF62A7;
+    -moz-box-shadow: inset -1px -1px 3px #FF62A7;
+    -webkit-box-shadow: inset -1px -1px 3px #FF62A7;
+    border-radius: 3px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;    
+    font-weight: bold;
+}
+.required{
+    color:red;
+    font-weight:normal;
+}
+
+.flight_box{
+    border: 1px solid;
+    font-size: larger;
+    padding: 15px;
+    width: 100%-10px;
+    margin: 10px
+}
+
+.flight_box1{
+    border: 1px solid;
+    font-size: larger;
+    padding: 15px;
+    width: 28%;
+    float: left;
+    margin: 10px
+}
+
+#extra_box{
+    width: 100%;
+    overflow: hidden;
+}
+
+.booking_box{
+    border: 1px solid;
+    font-size: larger;
+    padding: 15px;
+    height: auto;
+    width: 28%;
+    float: left;
+    margin: 10px    
+}
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Flight } from 'src/app/model/flight.model';
+import { Search } from 'src/app/model/search.model';
+import { FlightService } from 'src/app/service/flight.service';
+import { SearchService } from 'src/app/service/search.service';
+
+@Component({
+  selector: 'app-search-flights',
+  templateUrl: './search-flights.component.html',
+  styleUrls: ['./search-flights.component.css']
+})
+export class SearchFlightsComponent implements OnInit ,OnDestroy{
+
+
+  constructor(private searchService:SearchService,private flightService:FlightService,private router:Router) { }
+  search:Search;
+  flightArr:Flight[];
+  status:boolean;
+
+  ngOnInit(): void {
+    this.flightArr=[];
+    this.status=false;
+  }
+
+  onSearchSubmit(searchForm:NgForm){
+    this.search={
+      source:searchForm.value.source,
+      destination:searchForm.value.destination,
+      date:searchForm.value.date,
+    }
+    this.searchService.searchFlights(this.search).subscribe(
+      data=>{
+        this.flightArr=data;
+        this.status=true;
+      }
+    );
+  }
+
+  bookFlight(fid:number){
+    localStorage.setItem("flightId",String(fid));
+    this.router.navigateByUrl("/book-flight");
+  }
+
+  ngOnDestroy(): void {
+  }
+}
+
+//Insert Flight
+
+<div class="form-style-5">
+    <form #flightForm="ngForm" (submit)="onFlightSubmit(flightForm)">
+        <fieldset>
+            <legend><span class="number">1</span>Flight Details</legend>
+            <label>Source: </label>
+            <input type="text" name="source" ngModel #source="ngModel" placeholder="Source *">
+            <label>Destination: </label>
+            <input type="text" name="destination" ngModel #destination="ngModel" placeholder="Destination *">
+            <label>Departure Date: </label>
+            <input type="date" name="departureDate" ngModel #departureDate="ngModel"> <br>
+            <label>Departure Time: </label>
+            <input type="time" name="departureTime" ngModel #departureTime="ngModel"><br>
+            <label>Arrival Date: </label>
+            <input type="date" name="arrivalDate" ngModel #arrivalDate="ngModel"> <br>
+            <label>Arrival Time: </label>
+            <input type="time" name="arrivalTime" ngModel #arrivalTime="ngModel"> <br>
+            
+        </fieldset>
+        <fieldset>
+            <legend><span class="number">2</span>Fare And Seats</legend>
+            <label>Fare / Adult: </label>
+            <input type="text" name="adultFare" ngModel #adultFare="ngModel"> <br>
+            <label>Fare / Child: </label>
+            <input type="text" name="childFare" ngModel #childFare="ngModel"> <br>
+            <label>Seats : </label>
+            <input type="text" name="seats" ngModel #seats="ngModel"> <br>
+        </fieldset>
+        <input type="submit" value="Insert Flight" />
+    </form>
+</div>
+
+.form-style-5{
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-style-5 fieldset{
+    border: none;
+}
+.form-style-5 legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+.form-style-5 label {
+    display: block;
+    margin-bottom: 8px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 textarea,
+.form-style-5 select {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    background-color: #e8eeef;
+    color:#8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+    background: #d2d9dd;
+}
+.form-style-5 select{
+    -webkit-appearance: menulist-button;
+    height:35px;
+}
+.form-style-5 .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="button"]
+{
+    position: relative;
+    display: block;
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    margin: 0 auto;
+    background: #1abc9c;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 100%;
+    border: 1px solid #16a085;
+    border-width: 1px 1px 3px;
+    margin-bottom: 10px;
+}
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="button"]:hover
+{
+    background: #109177;
+}
+
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Flight } from 'src/app/model/flight.model';
+import { FlightService } from 'src/app/service/flight.service';
+
+@Component({
+  selector: 'app-insert-flight',
+  templateUrl: './insert-flight.component.html',
+  styleUrls: ['./insert-flight.component.css']
+})
+export class InsertFlightComponent implements OnInit {
+
+  constructor(private flightService:FlightService,private router:Router) { }
+
+  flight:Flight;
+
+  ngOnInit(): void {
+  }
+
+  onFlightSubmit(flightForm:NgForm){
+    console.log(flightForm.value.departureDate);
+    console.log(flightForm.value.departureTime);
+    this.flight={
+    source: flightForm.value.source,
+    destination: flightForm.value.destination,
+    departureDate: flightForm.value.departureDate,
+    departureTime: flightForm.value.departureTime,
+    arrivalDate: flightForm.value.arrivalDate,
+    arrivalTime: flightForm.value.arrivalTime,
+    adultFare:flightForm.value.adultFare,
+    childFare:flightForm.value.childFare,
+    seats: flightForm.value.seats
+    }
+
+    this.flightService.postFlight(this.flight).subscribe(
+      data=>{
+        this.router.navigateByUrl("/all-flights");
+      }
+    );
+  }
+
+}
+
+//Book Flight
+
+<div class="form-style-5">
+        <form #bookingForm="ngForm" (submit)="onBookingSubmit(bookingForm)">
+            <fieldset>
+                <legend><span class="number">1</span>Flight Details</legend>
+                <label>Source: {{flight.source}}</label>
+                <label>Destination: {{flight.destination}}</label>
+                <label>Departure Date: {{flight.departureDate}}</label>
+                <label>Departure Time: {{flight.departureTime}}</label>
+                <label>Arrival Date: {{flight.arrivalDate}}</label>
+                <label>Arrival Time: {{flight.arrivalTime}}</label>
+                
+            </fieldset>
+            <fieldset>
+                <legend><span class="number">2</span>Fare And Seats</legend>
+                <label>Fare / Adult: Rs.{{flight.adultFare}}</label>
+                <input type="text" name="adult" ngModel #adult="ngModel"> <br>
+                <label>Fare / Child: Rs.{{flight.childFare}}</label>
+                <input type="text" name="child" ngModel #child="ngModel"> <br>
+            </fieldset>
+            <input type="submit" value="Book Tickets" />
+        </form>
+    </div>
+    
+    .form-style-5{
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-style-5 fieldset{
+    border: none;
+}
+.form-style-5 legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+.form-style-5 label {
+    display: block;
+    margin-bottom: 8px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 textarea,
+.form-style-5 select {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    background-color: #e8eeef;
+    color:#8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+    background: #d2d9dd;
+}
+.form-style-5 select{
+    -webkit-appearance: menulist-button;
+    height:35px;
+}
+.form-style-5 .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="button"]
+{
+    position: relative;
+    display: block;
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    margin: 0 auto;
+    background: #1abc9c;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 100%;
+    border: 1px solid #16a085;
+    border-width: 1px 1px 3px;
+    margin-bottom: 10px;
+}
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="button"]:hover
+{
+    background: #109177;
+}
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Booking } from 'src/app/model/booking.model';
+import { BoookingDto } from 'src/app/model/bookingDto.model';
+import { Flight } from 'src/app/model/flight.model';
+import { BookingService } from 'src/app/service/booking.service';
+import { FlightService } from 'src/app/service/flight.service';
+
+@Component({
+  selector: 'app-book-flight',
+  templateUrl: './book-flight.component.html',
+  styleUrls: ['./book-flight.component.css']
+})
+export class BookFlightComponent implements OnInit, OnDestroy {
+
+  constructor(private flightService:FlightService,private bookingService:BookingService,private router:Router) { }
+  
+  flightId:number;
+  flight:Flight;
+  bookingDto:BoookingDto;
+  ngOnInit(): void {
+    this.flightId=Number(localStorage.getItem("flightId"));
+    this.flightService.getFlightById(this.flightId).subscribe(
+      data=>{
+        this.flight=data;
+      }
+    );
+  }
+
+  onBookingSubmit(bookingForm:NgForm){
+    this.bookingDto={
+      flightId:this.flightId,
+      adult:bookingForm.value.adult,
+      child:bookingForm.value.child
+    }
+    this.bookingService.postBooking(this.bookingDto).subscribe()
+    this.router.navigateByUrl("/all-bookings");
+  }
+  ngOnDestroy(): void {
+  }
+}
+
+//All Flights
+
+<h1>Flights</h1>
+<div id="extra_box">
+    <div class="flight_box1" *ngFor="let f of flightArr">
+        <div class="box-style-5">
+        Source : {{f.source}} <br>
+        Destination : {{f.destination}} <br>
+        Departure Date : {{f.departureDate}} <br>
+        Departure Time : {{f.departureTime}} <br>
+        Arrival Date : {{f.arrivalDate}} <br>
+        Arrival Time : {{f.arrivalTime}} <br>
+        Fare / Adult : {{f.adultFare}} <br>
+        Fare / Child : {{f.childFare}} <br>
+    </div>
+    </div>
+</div>
+
+.flight_box{
+    border: 1px solid;
+    font-size: larger;
+    padding: 15px;
+    width: 100%-10px;
+    margin: 10px
+}
+
+.flight_box1{
+    border: 1px solid;
+    font-size: larger;
+    padding: 15px;
+    width: 28%;
+    float: left;
+    margin: 10px;
+    background: #f4f7f8;
+    border-radius: 8px;
+}
+
+#extra_box{
+    width: 100%;
+    overflow: hidden;
+}
+
+.booking_box{
+    border: 1px solid;
+    font-size: larger;
+    padding: 15px;
+    height: auto;
+    width: 28%;
+    float: left;
+    margin: 10px    
+}
+
+.box-style-5{
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Flight } from 'src/app/model/flight.model';
+import { FlightService } from 'src/app/service/flight.service';
+
+@Component({
+  selector: 'app-all-flights',
+  templateUrl: './all-flights.component.html',
+  styleUrls: ['./all-flights.component.css']
+})
+export class AllFlightsComponent implements OnInit, OnDestroy{
+
+  constructor(private flightService:FlightService) { }
+  
+  flightArr:Flight[];
+
+  ngOnInit(): void {
+    this.flightService.getAllFlights().subscribe(data=>{
+      this.flightArr=data;
+    })
+  }
+
+  ngOnDestroy(): void {
+  }
+}
+
